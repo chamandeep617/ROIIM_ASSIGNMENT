@@ -34,13 +34,10 @@ public class CustomerServiceImpl implements CustomerService {
 
         Customer customer = customerRepository.findByEmail(customerDto.getEmail());
 
-        if(customer!= null && customer.getCustomerOperation() != null){
-            String str = createSingleUseToken(customerRepository.findByEmail(customerDto.getEmail()));
-            return str;
-        }
-
         if(customer == null) createCustomer(new Customer(),customerDto);
-        return null;
+
+        String str = createSingleUseToken(customerRepository.findByEmail(customerDto.getEmail()));
+        return str;
 
     }
 
